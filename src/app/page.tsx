@@ -1,51 +1,33 @@
-import { ModeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerClose,
-} from "@/components/ui/drawer";
 import { unstable_noStore as noStore } from "next/cache";
-import TestToast from "@/components/test-toast";
+import { PartyPopper, LinkIcon } from "lucide-react";
+import Link from "next/link";
 
 export default async function Home() {
   noStore();
 
   return (
-    <main className="flex h-dvh flex-col items-center justify-center gap-2">
-      <h1 className="line text-3xl font-extrabold leading-6 tracking-tight">
-        T3 + Turso + Shadcn
-      </h1>
-      <p className="text-muted-foreground">
-        Initially configured theme, vaul and toast
-      </p>
-      <p className="mt-12">Go ahead and test the toast!</p>
-      <TestToast />
-      <p className="mt-6">Now try to change color mode</p>
-      <ModeToggle />
-      <p className="mt-6">Finally, you can check Vaul!</p>
-      <Drawer>
-        <Button asChild>
-          <DrawerTrigger>Vaul</DrawerTrigger>
-        </Button>
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-            <DrawerDescription>This action cannot be undone.</DrawerDescription>
-          </DrawerHeader>
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+    <main className="space-y-8 px-4">
+      <section className="h-screen pt-56" id="hero">
+        <Link href="https://github.com/Vithrax/recipify" target="_blank">
+          <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-full border px-2 py-0.5">
+            <PartyPopper className="h-4 w-4" />
+            <p className="text-sm">We are now open sourced!</p>
+            <LinkIcon className="h-3 w-3" />
+          </div>
+        </Link>
+        <h1 className="tracking mt-3 text-center text-4xl font-extrabold leading-8 tracking-tight">
+          The Ultimate Recipe Workshop App
+        </h1>
+        <p className="mt-4 text-center leading-5">
+          Everything you need to perfect your recipies in{" "}
+          <span className="underline">one place.</span>
+        </p>
+        <div className="mt-10 flex items-center justify-center gap-2">
+          <Button>Become a chef</Button>
+          <Button variant="outline">Learn more</Button>
+        </div>
+      </section>
     </main>
   );
 }
