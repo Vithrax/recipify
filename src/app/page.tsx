@@ -6,6 +6,7 @@ import LandingPagePriceCalculator from "@/components/landing-page-price-calc";
 import { footerLinks } from "@/config";
 import LoginDrawer from "@/components/login-drawer";
 import { getServerAuthSession } from "@/server/auth";
+import AppPreviewCarousel from "@/components/landing-page-app-preview";
 
 export default async function Home() {
   noStore();
@@ -15,10 +16,10 @@ export default async function Home() {
     <main className="max-h-screen overflow-auto scroll-smooth">
       {/* hero section */}
       <section
-        className="relative h-[calc(100dvh-48px)] px-3 pt-24 text-center"
+        className="relative h-[calc(100dvh-48px)] px-3 pt-20 text-center"
         id="hero"
       >
-        <h1 className="mb-20 font-logo text-5xl text-primary">Recipify</h1>
+        <h1 className="mb-16 font-logo text-5xl text-primary">Recipify</h1>
         <header className="space-y-4">
           <Link href="https://github.com/Vithrax/recipify" target="_blank">
             <div className="mx-auto flex w-fit items-center justify-center gap-2 rounded-md border bg-primary/5 px-2 py-0.5">
@@ -49,6 +50,8 @@ export default async function Home() {
           )}
           <Button variant="outline">Learn more</Button>
         </div>
+
+        <AppPreviewCarousel />
       </section>
       <div className="bottom-0 h-12 ">
         <Link href="#about">
