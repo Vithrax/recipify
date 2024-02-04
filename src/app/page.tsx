@@ -13,7 +13,7 @@ export default async function Home() {
   const session = await getServerAuthSession();
 
   return (
-    <main className="overflow-auto scroll-smooth">
+    <main>
       {/* hero section */}
       <section className="relative px-3 pt-12 text-center" id="hero">
         <h1 className="mb-16 font-logo text-5xl text-primary">Recipify</h1>
@@ -45,7 +45,9 @@ export default async function Home() {
               <Button>Become a chef</Button>
             </LoginDrawer>
           )}
-          <Button variant="outline">Learn more</Button>
+          <Button variant="outline" asChild>
+            <Link href="#about">Learn more</Link>
+          </Button>
         </div>
 
         <AppPreviewCarousel />

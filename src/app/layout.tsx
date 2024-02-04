@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-sans ${GeistSans.className} h-screen bg-background antialiased`}
+        className={`font-sans ${GeistSans.className} bg-background antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system">
           <TRPCReactProvider>
@@ -28,7 +28,7 @@ export default function RootLayout({
               vaul-drawer-wrapper is data attribute 
               for drawer background scaling feature  
             */}
-            <div vaul-drawer-wrapper="" className="h-screen bg-background">
+            <div vaul-drawer-wrapper="" className="min-h-screen bg-background">
               {children}
             </div>
             <Toaster richColors />
