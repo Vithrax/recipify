@@ -12,6 +12,7 @@ import {
 import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
 import LoginDrawer from "./login-drawer";
+import Link from "next/link";
 
 type State = {
   unlimitedRecipes: boolean; // $5
@@ -80,7 +81,7 @@ const initialState: State = {
   finalPrice: 0,
 };
 
-const LandingPagePriceCalculator = () => {
+const LandingPagePriceCalculator = ({ session }: { session: boolean }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
@@ -148,11 +149,19 @@ const LandingPagePriceCalculator = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <LoginDrawer>
-          <Button className="w-full" size="lg">
-            Start now!
-          </Button>
-        </LoginDrawer>
+        {session ? (
+          <>
+            <Link href="/dashboard">
+              <Button>Start now!</Button>
+            </Link>
+          </>
+        ) : (
+          <LoginDrawer>
+            <Button className="w-full" size="lg">
+              Start now!
+            </Button>
+          </LoginDrawer>
+        )}
       </CardFooter>
     </Card>
   );

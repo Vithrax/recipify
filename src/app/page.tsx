@@ -116,7 +116,7 @@ export default async function Home() {
             won&apos;t use is a waste!
           </p>
         </header>
-        <LandingPagePriceCalculator />
+        <LandingPagePriceCalculator session={!!session} />
       </section>
 
       <footer className="bg-primary/5 p-8">
