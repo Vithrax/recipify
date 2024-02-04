@@ -5,15 +5,17 @@ import Link from "next/link";
 import LandingPagePriceCalculator from "@/components/landing-page-price-calc";
 import { footerLinks } from "@/config";
 import LoginDrawer from "@/components/login-drawer";
+import { getServerAuthSession } from "@/server/auth";
 
 export default async function Home() {
   noStore();
+  const session = await getServerAuthSession();
 
   return (
-    <main className="max-h-screen snap-y snap-mandatory overflow-auto scroll-smooth">
+    <main className="max-h-screen overflow-auto scroll-smooth">
       {/* hero section */}
       <section
-        className="relative h-[calc(100dvh-48px)] snap-start snap-always px-3 pt-24 text-center"
+        className="relative h-[calc(100dvh-48px)] px-3 pt-24 text-center"
         id="hero"
       >
         <h1 className="mb-20 font-logo text-5xl text-primary">Recipify</h1>
@@ -34,9 +36,17 @@ export default async function Home() {
           </p>
         </header>
         <div className="mt-10 flex items-center justify-center gap-2">
-          <LoginDrawer>
-            <Button>Become a chef</Button>
-          </LoginDrawer>
+          {session ? (
+            <>
+              <Link href="/dashboard">
+                <Button>Go to App</Button>
+              </Link>
+            </>
+          ) : (
+            <LoginDrawer>
+              <Button>Become a chef</Button>
+            </LoginDrawer>
+          )}
           <Button variant="outline">Learn more</Button>
         </div>
       </section>
@@ -48,7 +58,7 @@ export default async function Home() {
 
       {/* about section */}
       <section
-        className="flex h-screen snap-start snap-always flex-col justify-around bg-primary/10 px-3 text-center"
+        className="flex h-screen flex-col justify-around bg-primary/10 px-3 text-center"
         id="about"
       >
         <header className="space-y-3">
@@ -92,7 +102,7 @@ export default async function Home() {
 
       {/* Price */}
       <section
-        className="flex h-screen snap-start snap-always flex-col justify-around px-3 pb-8 text-center"
+        className="flex h-screen flex-col justify-around px-3 pb-8 text-center"
         id="price"
       >
         <header className="space-y-4 pb-8">
@@ -107,7 +117,7 @@ export default async function Home() {
         <LandingPagePriceCalculator />
       </section>
 
-      <footer className="snap-start  snap-always bg-primary/5 p-8">
+      <footer className="bg-primary/5 p-8">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-logo text-2xl text-primary">Recipify</h3>
