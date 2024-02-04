@@ -4,6 +4,7 @@ import { PartyPopper, LinkIcon, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import LandingPagePriceCalculator from "@/components/landing-page-price-calc";
 import { footerLinks } from "@/config";
+import LoginDrawer from "@/components/login-drawer";
 
 export default async function Home() {
   noStore();
@@ -33,7 +34,9 @@ export default async function Home() {
           </p>
         </header>
         <div className="mt-10 flex items-center justify-center gap-2">
-          <Button>Become a chef</Button>
+          <LoginDrawer>
+            <Button>Become a chef</Button>
+          </LoginDrawer>
           <Button variant="outline">Learn more</Button>
         </div>
       </section>

@@ -11,6 +11,7 @@ import {
 } from "./ui/card";
 import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
+import LoginDrawer from "./login-drawer";
 
 type State = {
   unlimitedRecipes: boolean; // $5
@@ -147,9 +148,11 @@ const LandingPagePriceCalculator = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full" size="lg">
-          Start now!
-        </Button>
+        <LoginDrawer>
+          <Button className="w-full" size="lg">
+            Start now!
+          </Button>
+        </LoginDrawer>
       </CardFooter>
     </Card>
   );
