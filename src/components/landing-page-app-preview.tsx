@@ -13,7 +13,7 @@ import Autoplay from "embla-carousel-autoplay";
 const AppPreviewCarousel = () => {
   return (
     <Carousel
-      className="mx-auto mt-4 w-full max-w-xs overflow-hidden rounded-lg"
+      className="mx-auto mt-16 w-full max-w-xs overflow-hidden rounded-lg"
       plugins={[
         Autoplay({
           delay: 2000,

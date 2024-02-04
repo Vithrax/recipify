@@ -13,12 +13,9 @@ export default async function Home() {
   const session = await getServerAuthSession();
 
   return (
-    <main className="max-h-screen overflow-auto scroll-smooth">
+    <main className="overflow-auto scroll-smooth">
       {/* hero section */}
-      <section
-        className="relative h-[calc(100dvh-48px)] px-3 pt-20 text-center"
-        id="hero"
-      >
+      <section className="relative px-3 pt-12 text-center" id="hero">
         <h1 className="mb-16 font-logo text-5xl text-primary">Recipify</h1>
         <header className="space-y-4">
           <Link href="https://github.com/Vithrax/recipify" target="_blank">
@@ -53,7 +50,7 @@ export default async function Home() {
 
         <AppPreviewCarousel />
       </section>
-      <div className="bottom-0 h-12 ">
+      <div className="bottom-0 mt-8 h-12 ">
         <Link href="#about">
           <ChevronDown className="mx-auto h-8 w-8 animate-bounce text-primary" />
         </Link>
