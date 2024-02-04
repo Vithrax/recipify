@@ -29,14 +29,13 @@ export default async function Home() {
             The Ultimate Recipe Workshop App
           </h2>
           <p className="leading-5">
-            Everything you need to perfect your recipies in{" "}
-            <span className="underline">one place.</span>
+            Everything you need to perfect your recipies in one place.
           </p>
         </header>
         <div className="mt-10 flex items-center justify-center gap-2">
           {session ? (
             <>
-              <Link href="/dashboard">
+              <Link href="/app">
                 <Button>Go to App</Button>
               </Link>
             </>

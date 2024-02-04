@@ -151,7 +151,7 @@ const LandingPagePriceCalculator = ({ session }: { session: boolean }) => {
       <CardFooter>
         {session ? (
           <>
-            <Link href="/dashboard">
+            <Link href="/app">
               <Button>Start now!</Button>
             </Link>
           </>

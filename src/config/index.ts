@@ -14,3 +14,11 @@ export const footerLinks: BaseLink[] = [
     text: "Price Calculator",
   },
 ];
+
+export const sideMenuGreetings: string[] = [
+  "Welcome back",
+  "Nice to see you",
+  "Have a great day",
+  "What's cracking",
+  "Wazzup",
+];

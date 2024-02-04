@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 	primary: rgb(249, 115, 22) */
+/* primary: hex #f97316 */
+
 @layer base {
   :root {
     --background: 0 0% 100%;
