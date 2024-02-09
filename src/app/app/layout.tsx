@@ -14,7 +14,7 @@ const Layout = async ({ children }: NextLayoutProps) => {
   return (
     <>
       <NavBar user={session.user} />
-      {children}
+      <main className="px-2">{children}</main>
     </>
   );
 };
