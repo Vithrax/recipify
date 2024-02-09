@@ -4,7 +4,7 @@ const Page = () => {
   return (
     <>
       <h2 className="p-3 text-3xl font-semibold tracking-tight">Recipies</h2>
-      <ul className="space-y-3">
+      <ul className="space-y-3 pb-3">
         <RecipePreviewCard />
         <RecipePreviewCard />
         <RecipePreviewCard />
