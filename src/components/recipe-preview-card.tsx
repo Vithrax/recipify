@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 // interface Props {
 //   id: number;
-//   imageRef?: string;
+//   image?: string;
 //   title: string;
 //   description?: string;
 //   cookingTime: number;
@@ -27,7 +27,7 @@ const RecipePreviewCard = (
     //   id,
     //   title,
     //   description,
-    //   imageRef,
+    //   image,
   },
 ) => {
   return (
