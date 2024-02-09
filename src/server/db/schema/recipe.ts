@@ -5,7 +5,7 @@ import { int, text } from "drizzle-orm/sqlite-core";
 import { createTable, users } from ".";
 import { sql } from "drizzle-orm";
 
-export const recipe = createTable("recipe", {
+export const recipes = createTable("recipe", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name", { length: 256 }).notNull(),
   description: text("description", { length: 256 }),
@@ -21,8 +21,8 @@ export const recipe = createTable("recipe", {
   updatedAt: int("updatedAt", { mode: "timestamp" }),
 });
 
-const selectRecipeSchema = createSelectSchema(recipe);
-const insertRecipeSchema = createInsertSchema(recipe);
+export const RecipeSchema = createSelectSchema(recipes);
+export const NewRecipeSchema = createInsertSchema(recipes);
 
-export type Recipe = z.infer<typeof selectRecipeSchema>;
-export type NewRecipe = z.infer<typeof insertRecipeSchema>;
+export type Recipe = z.infer<typeof RecipeSchema>;
+export type NewRecipe = z.infer<typeof NewRecipeSchema>;
