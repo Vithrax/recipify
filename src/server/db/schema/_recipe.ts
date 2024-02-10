@@ -1,4 +1,4 @@
-import { type z } from "zod";
+import type z from "zod";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 import { createTable } from "@/lib/utils";
@@ -23,7 +23,10 @@ export const recipes = createTable("recipe", {
 });
 
 export const RecipeSchema = createSelectSchema(recipes);
-export const NewRecipeSchema = createInsertSchema(recipes);
+export const NewRecipeSchema = createInsertSchema(recipes, {
+  image: (schema) =>
+    schema.image.regex(/^https:\/\/images.unsplash.com\/[\w\W]+/gm),
+});
 
 export type Recipe = z.infer<typeof RecipeSchema>;
 export type NewRecipe = z.infer<typeof NewRecipeSchema>;
