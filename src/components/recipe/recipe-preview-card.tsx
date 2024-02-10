@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import {
   Card,
@@ -5,30 +6,33 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 import { Clock, Heart, Star } from "lucide-react";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 import { cn } from "@/lib/utils";
 import { type Recipe } from "@/server/db/schema";
+import { useRecipeListStore } from "@/state/recipe-list";
 
 interface Props {
   recipe: Recipe;
 }
 
 const RecipePreviewCard = ({ recipe }: Props) => {
+  const { minimized } = useRecipeListStore();
+
   return (
     <li>
       <Card className="relative overflow-hidden">
-        <div className={cn("relative h-72")}>
-          {recipe.image && (
+        {recipe.image && !minimized && (
+          <div className={cn("relative h-72")}>
             <Image
               src={recipe.image}
               alt="dish picture"
               fill
               className="object-cover"
             />
-          )}
-        </div>
+          </div>
+        )}
         <CardHeader>
           <CardTitle>{recipe.name}</CardTitle>
           <CardDescription>{recipe.description}</CardDescription>
