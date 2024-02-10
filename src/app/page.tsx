@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { unstable_noStore as noStore } from "next/cache";
 import { PartyPopper, LinkIcon, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import LandingPagePriceCalculator from "@/components/landing-page-price-calc";
@@ -9,7 +8,6 @@ import { getServerAuthSession } from "@/server/auth";
 import AppPreviewCarousel from "@/components/landing-page-app-preview";
 
 export default async function Home() {
-  noStore();
   const session = await getServerAuthSession();
 
   return (

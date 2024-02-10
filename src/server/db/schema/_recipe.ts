@@ -1,8 +1,9 @@
 import { type z } from "zod";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
+import { createTable } from "@/lib/utils";
 import { int, text } from "drizzle-orm/sqlite-core";
-import { createTable, users } from ".";
+import { users } from ".";
 import { sql } from "drizzle-orm";
 
 export const recipes = createTable("recipe", {

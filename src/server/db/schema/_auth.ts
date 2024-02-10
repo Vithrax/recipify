@@ -1,33 +1,7 @@
-import { relations, sql } from "drizzle-orm";
-import { index, int, primaryKey, text } from "drizzle-orm/sqlite-core";
 import { type AdapterAccount } from "next-auth/adapters";
-import { createTable } from ".";
-
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
-
-export const posts = createTable(
-  "post",
-  {
-    id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    name: text("name", { length: 256 }),
-    createdById: text("createdById", { length: 255 })
-      .notNull()
-      .references(() => users.id),
-    createdAt: int("created_at", { mode: "timestamp" })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: int("updatedAt", { mode: "timestamp" }),
-  },
-  (example) => ({
-    createdByIdIdx: index("createdById_idx").on(example.createdById),
-    nameIndex: index("name_idx").on(example.name),
-  }),
-);
+import { sql } from "drizzle-orm";
+import { index, int, primaryKey, text } from "drizzle-orm/sqlite-core";
+import { createTable } from "@/lib/utils";
 
 export const users = createTable("user", {
   id: text("id", { length: 255 }).notNull().primaryKey(),
@@ -38,10 +12,6 @@ export const users = createTable("user", {
   }).default(sql`CURRENT_TIMESTAMP`),
   image: text("image", { length: 255 }),
 });
-
-export const usersRelations = relations(users, ({ many }) => ({
-  accounts: many(accounts),
-}));
 
 export const accounts = createTable(
   "account",
@@ -70,10 +40,6 @@ export const accounts = createTable(
   }),
 );
 
-export const accountsRelations = relations(accounts, ({ one }) => ({
-  user: one(users, { fields: [accounts.userId], references: [users.id] }),
-}));
-
 export const sessions = createTable(
   "session",
   {
@@ -87,10 +53,6 @@ export const sessions = createTable(
     userIdIdx: index("session_userId_idx").on(session.userId),
   }),
 );
-
-export const sessionsRelations = relations(sessions, ({ one }) => ({
-  user: one(users, { fields: [sessions.userId], references: [users.id] }),
-}));
 
 export const verificationTokens = createTable(
   "verificationToken",

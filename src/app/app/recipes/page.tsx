@@ -1,11 +1,11 @@
 import RecipePreviewCard from "@/components/recipe-preview-card";
+import { unstable_noStore as noStore } from "next/cache";
 import { api } from "@/trpc/server";
 import { Ghost } from "lucide-react";
 
 const Page = async () => {
+  noStore();
   const recipes = await api.recipe.getAll.query();
-
-  console.log(recipes);
 
   return (
     <>
