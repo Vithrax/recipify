@@ -1,4 +1,4 @@
-import NavBar from "@/components/nav-bar";
+import NavBar from "@/components/layout/nav-bar";
 import { getServerAuthSession } from "@/server/auth";
 import { type NextLayoutProps } from "@/types";
 import { redirect } from "next/navigation";

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { PartyPopper, LinkIcon, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import LandingPagePriceCalculator from "@/components/landing-page-price-calc";
+import LandingPagePriceCalculator from "@/components/landing-page/landing-page-price-calc";
 import { footerLinks } from "@/config";
-import LoginDrawer from "@/components/login-drawer";
+import LoginDrawer from "@/components/landing-page/login-drawer";
 import { getServerAuthSession } from "@/server/auth";
-import AppPreviewCarousel from "@/components/landing-page-app-preview";
+import AppPreviewCarousel from "@/components/landing-page/landing-page-app-preview";
 
 export default async function Home() {
   const session = await getServerAuthSession();

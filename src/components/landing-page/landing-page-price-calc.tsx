@@ -8,9 +8,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Switch } from "./ui/switch";
-import { Button } from "./ui/button";
+} from "../ui/card";
+import { Switch } from "../ui/switch";
+import { Button } from "../ui/button";
 import LoginDrawer from "./login-drawer";
 import Link from "next/link";
 

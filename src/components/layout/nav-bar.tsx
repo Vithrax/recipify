@@ -2,7 +2,7 @@ import { type User } from "next-auth";
 import Link from "next/link";
 import SideMenu from "./side-menu";
 
-import { ModeToggle } from "./ui/theme-toggle";
+import { ModeToggle } from "../ui/theme-toggle";
 
 interface NavBarProps {
   user: User;

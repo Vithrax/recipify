@@ -7,7 +7,7 @@ import {
   SheetTrigger,
   SheetFooter,
 } from "@/components/ui/sheet";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Menu, Settings } from "lucide-react";
 import { type User } from "next-auth";
 import { randItem } from "@/lib/utils";

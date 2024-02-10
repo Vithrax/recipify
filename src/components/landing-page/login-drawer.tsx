@@ -1,7 +1,7 @@
 "use client";
 
 import { type FC, type ReactNode } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -11,8 +11,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "./ui/drawer";
-import { Icons } from "./icons";
+} from "../ui/drawer";
+import { Icons } from "../icons";
 import { signIn } from "next-auth/react";
 
 interface LoginDrawerProps {
