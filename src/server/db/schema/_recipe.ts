@@ -25,7 +25,10 @@ export const recipes = createTable("recipe", {
 export const RecipeSchema = createSelectSchema(recipes);
 export const NewRecipeSchema = createInsertSchema(recipes, {
   image: (schema) =>
-    schema.image.regex(/^https:\/\/images.unsplash.com\/[\w\W]+/gm),
+    schema.image.regex(
+      /^https:\/\/images.unsplash.com\/[\w\W]+/gm,
+      "Invalid url",
+    ),
 });
 
 export type Recipe = z.infer<typeof RecipeSchema>;

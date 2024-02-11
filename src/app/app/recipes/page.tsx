@@ -12,7 +12,7 @@ const Page = async () => {
 
   return (
     <>
-      <div className="p-1">
+      <div className="p-1 pb-16">
         <header className="flex items-center justify-between">
           <h2 className="p-3 text-2xl font-semibold tracking-tight">
             Recipies

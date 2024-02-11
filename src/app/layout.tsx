@@ -48,10 +48,6 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system">
           <TRPCReactProvider>
-            {/* 
-              vaul-drawer-wrapper is data attribute 
-              for drawer background scaling feature  
-            */}
             <div vaul-drawer-wrapper="" className="min-h-screen bg-background">
               {children}
             </div>
