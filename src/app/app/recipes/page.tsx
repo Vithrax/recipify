@@ -18,7 +18,7 @@ const Page = async () => {
           <RecipeListSortSelect />
           <RecipeListStyleSwitch />
         </header>
-        <ul className="space-y-3 pb-3">
+        <ul className="space-y-1 pb-3">
           {recipes.map((recipe) => (
             <RecipePreviewCard recipe={recipe} key={recipe.id} />
           ))}

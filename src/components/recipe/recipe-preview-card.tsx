@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import {
   Card,
@@ -7,11 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Clock, Heart, Star } from "lucide-react";
+import { Clock, Heart, Loader2, Star } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { cn } from "@/lib/utils";
-import { type Recipe } from "@/server/db/schema";
 import { useRecipeListStore } from "@/state/recipe-list";
+import { api } from "@/trpc/react";
+import { type Recipe } from "@/server/db/schema";
 
 interface Props {
   recipe: Recipe;
@@ -19,6 +21,13 @@ interface Props {
 
 const RecipePreviewCard = ({ recipe }: Props) => {
   const { minimized } = useRecipeListStore();
+  const {
+    mutate: toggleFavorite,
+    data,
+    isLoading,
+  } = api.recipe.toggleFavorite.useMutation();
+
+  const favorite = data ?? recipe.favorite;
 
   return (
     <li>
@@ -47,11 +56,16 @@ const RecipePreviewCard = ({ recipe }: Props) => {
             <Star className="h-5 w-5 text-primary" />
             3.9
           </div>
-          <Heart
-            className={cn("ml-auto mr-2 h-5 w-5 text-primary", {
-              "fill-primary": recipe.favorite,
-            })}
-          />
+          {isLoading ? (
+            <Loader2 className="ml-auto mr-2 h-5 w-5 animate-spin text-primary" />
+          ) : (
+            <Heart
+              onClick={() => toggleFavorite(recipe.id)}
+              className={cn("ml-auto mr-2 h-5 w-5 text-primary", {
+                "fill-primary": favorite,
+              })}
+            />
+          )}
         </CardFooter>
       </Card>
     </li>
