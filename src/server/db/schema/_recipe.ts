@@ -10,6 +10,7 @@ export const recipes = createTable("recipe", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name", { length: 256 }).notNull(),
   description: text("description", { length: 256 }),
+  slug: text("slug", { length: 256 }),
   image: text("image", { length: 256 }),
   cookingTime: int("cookingTime", { mode: "number" }),
   favorite: int("favorite", { mode: "boolean" }),

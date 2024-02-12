@@ -5,7 +5,7 @@ const Page = ({}: NextPageProps) => {
   return (
     <>
       <h2 className="p-3 text-3xl font-semibold tracking-tight">Dashboard</h2>
-      <div className="space-y-3 p-3">
+      <div className="flex flex-col gap-3 p-3">
         <DashboardCard
           description="In total"
           title="Recipes"

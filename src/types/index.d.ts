@@ -4,7 +4,7 @@ export type BaseLink = {
 };
 
 export interface NextPageProps {
-  params: { slug: string };
+  params: Record<string, string>;
   searchParams: Record<string, string>;
 }
 

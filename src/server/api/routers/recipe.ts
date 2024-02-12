@@ -2,6 +2,7 @@ import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { NewRecipeSchema, recipes } from "@/server/db/schema";
 import { eq, and } from "drizzle-orm";
 import { z } from "zod";
+import slugify from "slugify";
 
 export const recipeRouter = createTRPCRouter({
   getAll: protectedProcedure.query(async ({ ctx }) => {
@@ -25,9 +26,11 @@ export const recipeRouter = createTRPCRouter({
   create: protectedProcedure
     .input(NewRecipeSchema)
     .mutation(async ({ ctx, input }) => {
+      const slug = slugify(input.name.toLowerCase());
       const data = {
         ...input,
         createdBy: ctx.session.user.id,
+        slug,
       };
 
       await ctx.db.insert(recipes).values(data);

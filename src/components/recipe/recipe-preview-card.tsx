@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { useRecipeListStore } from "@/state/recipe-list";
 import { api } from "@/trpc/react";
 import { type Recipe } from "@/server/db/schema";
+import Link from "next/link";
 
 interface Props {
   recipe: Recipe;
@@ -32,20 +33,24 @@ const RecipePreviewCard = ({ recipe }: Props) => {
   return (
     <li>
       <Card className="relative overflow-hidden">
-        {recipe.image && !minimized && (
-          <div className={cn("relative h-72")}>
-            <Image
-              src={recipe.image}
-              alt="dish picture"
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
-        <CardHeader>
-          <CardTitle>{recipe.name}</CardTitle>
-          <CardDescription>{recipe.description}</CardDescription>
-        </CardHeader>
+        <Link href={`/app/recipes/${recipe.id}/${recipe.slug}`}>
+          {recipe.image && !minimized && (
+            <div className={cn("relative h-72")}>
+              <Image
+                src={recipe.image}
+                alt="dish picture"
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+          <CardHeader>
+            <CardTitle>{recipe.name}</CardTitle>
+            <CardDescription className="line-clamp-3">
+              {recipe.description}
+            </CardDescription>
+          </CardHeader>
+        </Link>
         <CardFooter className="flex items-center gap-4 bg-primary/5 p-2 pl-3">
           <div className="flex items-center justify-center gap-1">
             <Clock className="h-5 w-5 text-primary" />

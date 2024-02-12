@@ -5,7 +5,7 @@ import { Ghost } from "lucide-react";
 import RecipeListStyleSwitch from "@/components/recipe/recipe-list-style-switch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import RecipeListSortSelect from "@/components/recipe/recipie-list-sort";
+import RecipeListSortSelect from "@/components/recipe/recipe-list-sort";
 
 const Page = async () => {
   noStore();
