@@ -5,6 +5,7 @@ import { Ghost } from "lucide-react";
 import RecipeListStyleSwitch from "@/components/recipe/recipe-list-style-switch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import RecipeListSortSelect from "@/components/recipe/recipie-list-sort";
 
 const Page = async () => {
   noStore();
@@ -13,10 +14,8 @@ const Page = async () => {
   return (
     <>
       <div className="p-1 pb-16">
-        <header className="flex items-center justify-between">
-          <h2 className="p-3 text-2xl font-semibold tracking-tight">
-            Recipies
-          </h2>
+        <header className="flex items-center justify-between pb-1">
+          <RecipeListSortSelect />
           <RecipeListStyleSwitch />
         </header>
         <ul className="space-y-3 pb-3">

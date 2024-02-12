@@ -3,9 +3,8 @@ import "@/styles/globals.css";
 import { type Viewport, type Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 
-import { TRPCReactProvider } from "@/trpc/react";
-import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import Providers from "@/components/providers";
 
 export const metadata: Metadata = {
   title: "Recipify",
@@ -42,18 +41,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    // Next themes lib causes hydration error
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`font-sans ${GeistSans.className} bg-background antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <TRPCReactProvider>
-            <div vaul-drawer-wrapper="" className="min-h-screen bg-background">
-              {children}
-            </div>
-            <Toaster richColors />
-          </TRPCReactProvider>
-        </ThemeProvider>
+        <Providers>
+          <div vaul-drawer-wrapper="" className="min-h-screen bg-background">
+            {children}
+          </div>
+          <Toaster richColors />
+        </Providers>
       </body>
     </html>
   );
