@@ -1,5 +1,5 @@
 "use client";
-import { Switch } from "../ui/switch";
+import { Switch } from "../../ui/switch";
 import { useRecipeListStore } from "@/state/recipe-list";
 
 const RecipeListStyleSwitch = () => {

@@ -1,17 +1,20 @@
 import { api } from "@/trpc/server";
 import { notFound } from "next/navigation";
 import { type NextPageProps } from "@/types";
+import RecipeView from "@/components/recipe/recipe-view/recipe-view";
 
 const page = async ({ params }: NextPageProps) => {
   if (!params.id) {
     return notFound();
   }
 
-  const recipe = await api.recipe.getById.query(+params.id);
+  const [recipe] = await api.recipe.getById.query(+params.id);
 
-  console.log(recipe);
+  if (!recipe) {
+    return notFound();
+  }
 
-  return <div>page</div>;
+  return <RecipeView recipe={recipe} />;
 };
 
 export default page;

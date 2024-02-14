@@ -23,6 +23,26 @@ export const recipes = createTable("recipe", {
   updatedAt: int("updatedAt", { mode: "timestamp" }),
 });
 
+export const ingredients = createTable("ingredient", {
+  id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  recipeId: int("recipeId")
+    .notNull()
+    .references(() => recipes.id),
+  amount: text("amount", { length: 255 }).notNull(),
+  name: text("name", { length: 255 }).notNull(),
+});
+
+export const steps = createTable("step", {
+  id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  recipeId: int("recipeId")
+    .notNull()
+    .references(() => recipes.id),
+  title: text("amount", { length: 255 }).notNull(),
+  description: text("name", { length: 255 }).notNull(),
+});
+
+// Schemas
+
 export const RecipeSchema = createSelectSchema(recipes);
 export const NewRecipeSchema = createInsertSchema(recipes, {
   image: (schema) =>
@@ -32,5 +52,19 @@ export const NewRecipeSchema = createInsertSchema(recipes, {
     ),
 });
 
+export const IngredientSchema = createSelectSchema(ingredients);
+export const NewIngredientSchema = createInsertSchema(ingredients);
+
+export const StepSchema = createSelectSchema(steps);
+export const NewStepSchema = createInsertSchema(steps);
+
+// Types
+
 export type Recipe = z.infer<typeof RecipeSchema>;
 export type NewRecipe = z.infer<typeof NewRecipeSchema>;
+
+export type Ingredient = z.infer<typeof IngredientSchema>;
+export type NewIngredient = z.infer<typeof NewIngredientSchema>;
+
+export type Step = z.infer<typeof StepSchema>;
+export type NewStep = z.infer<typeof NewStepSchema>;

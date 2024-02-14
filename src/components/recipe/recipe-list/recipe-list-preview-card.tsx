@@ -7,9 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 import { Clock, Heart, Loader2, Star } from "lucide-react";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../ui/separator";
 import { cn } from "@/lib/utils";
 import { useRecipeListStore } from "@/state/recipe-list";
 import { api } from "@/trpc/react";

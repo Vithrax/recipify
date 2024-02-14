@@ -42,6 +42,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
+    NEXT_PUBLIC_HOSTNAME_URL: z.string().url(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -61,6 +62,7 @@ export const env = createEnv({
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+    NEXT_PUBLIC_HOSTNAME_URL: process.env.NEXT_PUBLIC_HOSTNAME_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

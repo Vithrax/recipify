@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { accounts, recipes, sessions, users } from ".";
+import { accounts, ingredients, recipes, sessions, steps, users } from ".";
 
 // next-auth
 export const usersRelations = relations(users, ({ many }) => ({
@@ -16,6 +16,19 @@ export const sessionsRelations = relations(sessions, ({ one }) => ({
 }));
 
 // recipes
-export const recipesRelations = relations(recipes, ({ one }) => ({
-  users: one(users),
+export const recipesRelations = relations(recipes, ({ one, many }) => ({
+  users: one(users, { fields: [recipes.createdBy], references: [users.id] }),
+  ingredients: many(ingredients),
+  steps: many(steps),
+}));
+
+export const ingredientsRelations = relations(ingredients, ({ one }) => ({
+  recipes: one(recipes, {
+    fields: [ingredients.recipeId],
+    references: [recipes.id],
+  }),
+}));
+
+export const stepsRelations = relations(steps, ({ one }) => ({
+  recipes: one(recipes, { fields: [steps.recipeId], references: [recipes.id] }),
 }));

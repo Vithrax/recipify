@@ -35,6 +35,18 @@ export const recipeRouter = createTRPCRouter({
 
       await ctx.db.insert(recipes).values(data);
     }),
+  delete: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .delete(recipes)
+        .where(
+          and(
+            eq(recipes.id, input.id),
+            eq(recipes.createdBy, ctx.session.user.id),
+          ),
+        );
+    }),
   toggleFavorite: protectedProcedure
     .input(z.number())
     .mutation(async ({ ctx, input }) => {

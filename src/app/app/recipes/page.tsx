@@ -1,11 +1,11 @@
-import RecipePreviewCard from "@/components/recipe/recipe-preview-card";
+import RecipePreviewCard from "@/components/recipe/recipe-list/recipe-list-preview-card";
 import { unstable_noStore as noStore } from "next/cache";
 import { api } from "@/trpc/server";
 import { Ghost } from "lucide-react";
-import RecipeListStyleSwitch from "@/components/recipe/recipe-list-style-switch";
+import RecipeListStyleSwitch from "@/components/recipe/recipe-list/recipe-list-style-switch";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import RecipeListSortSelect from "@/components/recipe/recipe-list-sort";
+import RecipeListSortSelect from "@/components/recipe/recipe-list/recipe-list-sort";
 
 const Page = async () => {
   noStore();
