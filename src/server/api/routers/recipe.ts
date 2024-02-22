@@ -3,6 +3,7 @@ import { NewRecipeSchema, recipes } from "@/server/db/schema";
 import { eq, and } from "drizzle-orm";
 import { z } from "zod";
 import slugify from "slugify";
+import { UTApi } from "uploadthing/server";
 
 export const recipeRouter = createTRPCRouter({
   getAll: protectedProcedure.query(async ({ ctx }) => {
@@ -42,6 +43,24 @@ export const recipeRouter = createTRPCRouter({
   delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
+      const recipe = await ctx.db.query.recipes.findFirst({
+        where: and(
+          eq(recipes.id, input.id),
+          eq(recipes.createdBy, ctx.session.user.id),
+        ),
+        columns: {
+          image: true,
+        },
+      });
+
+      // remove image from UT
+      if (recipe?.image) {
+        const url = recipe.image;
+        const newUrl = url.substring(url.lastIndexOf("/") + 1);
+        const utapi = new UTApi(); // i used this inside route file in uploadthing folder
+        await utapi.deleteFiles(newUrl);
+      }
+
       await ctx.db
         .delete(recipes)
         .where(
