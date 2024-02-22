@@ -34,7 +34,7 @@ const RecipeUploadDropzone = ({ recipeId }: Props) => {
         toast.success("Image uploaded successfully!");
         router.refresh();
       }}
-      onUploadError={() => toast.error("Image upload failed")}
+      onUploadError={(err) => toast.error(err.message)}
     />
   );
 };
