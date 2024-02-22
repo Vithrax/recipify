@@ -8,13 +8,13 @@ const page = async ({ params }: NextPageProps) => {
     return notFound();
   }
 
-  const [recipe] = await api.recipe.getById.query(+params.id);
+  const fullRecipe = await api.recipe.getById.query(+params.id);
 
-  if (!recipe) {
+  if (!fullRecipe) {
     return notFound();
   }
 
-  return <RecipeView recipe={recipe} />;
+  return <RecipeView recipe={fullRecipe} />;
 };
 
 export default page;

@@ -16,7 +16,7 @@ export const recipes = createTable("recipe", {
   favorite: int("favorite", { mode: "boolean" }),
   createdBy: text("createdBy", { length: 255 })
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   createdAt: int("created_at", { mode: "timestamp" })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
@@ -27,7 +27,7 @@ export const ingredients = createTable("ingredient", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   recipeId: int("recipeId")
     .notNull()
-    .references(() => recipes.id),
+    .references(() => recipes.id, { onDelete: "cascade" }),
   amount: text("amount", { length: 255 }).notNull(),
   name: text("name", { length: 255 }).notNull(),
 });
@@ -36,7 +36,7 @@ export const steps = createTable("step", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   recipeId: int("recipeId")
     .notNull()
-    .references(() => recipes.id),
+    .references(() => recipes.id, { onDelete: "cascade" }),
   title: text("amount", { length: 255 }).notNull(),
   description: text("name", { length: 255 }).notNull(),
 });

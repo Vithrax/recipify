@@ -13,15 +13,16 @@ export const recipeRouter = createTRPCRouter({
   getById: protectedProcedure
     .input(z.number())
     .query(async ({ ctx, input }) => {
-      return await ctx.db
-        .select()
-        .from(recipes)
-        .where(
-          and(
-            eq(recipes.id, input),
-            eq(recipes.createdBy, ctx.session.user.id),
-          ),
-        );
+      return await ctx.db.query.recipes.findFirst({
+        where: and(
+          eq(recipes.id, input),
+          eq(recipes.createdBy, ctx.session.user.id),
+        ),
+        with: {
+          ingredients: true,
+          steps: true,
+        },
+      });
     }),
   create: protectedProcedure
     .input(NewRecipeSchema)
@@ -74,5 +75,23 @@ export const recipeRouter = createTRPCRouter({
         );
 
       return !favorite;
+    }),
+  uploadImage: protectedProcedure
+    .input(
+      z.object({
+        recipeId: z.number(),
+        image: z.string().url(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id } = ctx.session.user;
+      const { recipeId, image } = input;
+
+      return await ctx.db
+        .update(recipes)
+        .set({
+          image,
+        })
+        .where(and(eq(recipes.id, recipeId), eq(recipes.createdBy, id)));
     }),
 });

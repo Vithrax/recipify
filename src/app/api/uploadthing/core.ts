@@ -1,25 +1,19 @@
+import { getServerAuthSession } from "@/server/auth";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
 const f = createUploadthing();
 
-const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
-
 export const ourFileRouter = {
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
-    .middleware(async ({ req }) => {
-      const user = auth(req);
-      if (!user) throw new UploadThingError("Unauthorized");
+  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+    .middleware(async () => {
+      const session = await getServerAuthSession();
+      if (!session) throw new UploadThingError("Unauthorized");
 
-      return { userId: user.id };
+      return {};
     })
-    .onUploadComplete(async ({ metadata, file }) => {
-      console.log("Upload complete for userId:", metadata.userId);
-
-      console.log("file url", file.url);
-
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+    .onUploadComplete(async ({ file }) => {
+      return { url: file.url };
     }),
 } satisfies FileRouter;
 
