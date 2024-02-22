@@ -58,7 +58,7 @@ const RecipeView = ({ recipe }: Props) => {
           />
         )}
         <div className="px-2 pt-4">
-          <h2 className="flex items-center justify-between text-3xl font-medium tracking-tight">
+          <h2 className="flex items-center justify-between text-3xl font-semibold tracking-tight">
             <span className="truncate">{name}</span>{" "}
             <RecipeDropdownOptions id={recipe.id} />
           </h2>

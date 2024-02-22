@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, type ReactNode } from "react";
+import { type FC } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -12,16 +12,22 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Trash2 } from "lucide-react";
 
 interface Props {
-  children: ReactNode;
   title: string;
+  callback: () => void;
 }
 
-const RecipeDrawer: FC<Props> = ({ children, title }) => {
+const RecipeRemoveDrawer: FC<Props> = ({ title }) => {
   return (
     <Drawer>
-      <DrawerTrigger asChild>{children}</DrawerTrigger>
+      <DrawerTrigger asChild>
+        <div>
+          <Trash2 className="mr-2 h-4 w-4" />
+          <span>Delete</span>
+        </div>
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Remove {title}?</DrawerTitle>
@@ -39,4 +45,4 @@ const RecipeDrawer: FC<Props> = ({ children, title }) => {
   );
 };
 
-export default RecipeDrawer;
+export default RecipeRemoveDrawer;

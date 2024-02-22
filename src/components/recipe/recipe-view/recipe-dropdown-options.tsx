@@ -47,7 +47,7 @@ const RecipeDropdownOptions = ({ id }: Props) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="px-4">Recipe Actions</DropdownMenuLabel>
+        <DropdownMenuLabel className="px-4">Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
