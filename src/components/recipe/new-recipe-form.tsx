@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,10 +15,11 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
-import { Switch } from "../ui/switch";
 import { api } from "@/trpc/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+
+type InitialRecipe = Pick<NewRecipe, "name" | "description" | "createdBy">;
 
 interface Props {
   user: User;
@@ -27,22 +27,21 @@ interface Props {
 
 const NewRecipeForm = ({ user }: Props) => {
   const router = useRouter();
-  const form = useForm<NewRecipe>({
+  const form = useForm<InitialRecipe>({
     resolver: zodResolver(NewRecipeSchema),
     defaultValues: {
-      cookingTime: 0,
       description: "",
-      favorite: false,
-      image: "",
       name: "",
       createdBy: user.id,
     },
   });
 
   const { mutate: addRecipe } = api.recipe.create.useMutation({
-    onSuccess: () => {
+    onSuccess: ([recipe]) => {
+      // if successfull then return value is 100% returned
+      const { id, slug } = recipe!;
       toast.success("Recipe created successfully!");
-      router.push("/app/recipes");
+      router.push(`/app/recipes/${id}/${slug}`);
       router.refresh();
     },
   });
@@ -69,45 +68,6 @@ const NewRecipeForm = ({ user }: Props) => {
           />
           <FormField
             control={form.control}
-            name="cookingTime"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Cooking Time</FormLabel>
-                <FormControl>
-                  {/* @ts-expect-error drizzle-zod createInputSchema null conflict */}
-                  <Input
-                    placeholder="recipe name..."
-                    {...field}
-                    onChange={(event) => field.onChange(+event.target.value)}
-                    type="number"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="image"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Image link</FormLabel>
-                <FormControl>
-                  {/* @ts-expect-error drizzle-zod createInputSchema null conflict */}
-                  <Input
-                    placeholder="https://images.unsplashed.com/"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Use can use only images from unsplashed
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="description"
             render={({ field }) => (
               <FormItem>
@@ -117,35 +77,16 @@ const NewRecipeForm = ({ user }: Props) => {
                   <Textarea
                     placeholder="Describe your recipe!"
                     {...field}
-                    rows={8}
+                    rows={4}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="favorite"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base">Favorite</FormLabel>
-                  <FormDescription>
-                    Mark this recipe as your favorite
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    // @ts-expect-error drizzle-zod createInputSchema null conflict
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
         </form>
       </Form>
     </div>

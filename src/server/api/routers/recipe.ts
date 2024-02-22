@@ -34,7 +34,10 @@ export const recipeRouter = createTRPCRouter({
         slug,
       };
 
-      await ctx.db.insert(recipes).values(data);
+      return await ctx.db.insert(recipes).values(data).returning({
+        id: recipes.id,
+        slug: recipes.slug,
+      });
     }),
   delete: protectedProcedure
     .input(z.object({ id: z.number() }))

@@ -3,9 +3,8 @@ import { unstable_noStore as noStore } from "next/cache";
 import { api } from "@/trpc/server";
 import { Ghost } from "lucide-react";
 import RecipeListStyleSwitch from "@/components/recipe/recipe-list/recipe-list-style-switch";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import RecipeListSortSelect from "@/components/recipe/recipe-list/recipe-list-sort";
+import NewRecipeDrawer from "@/components/recipe/new-recipe-drawer";
 
 const Page = async () => {
   noStore();
@@ -31,9 +30,7 @@ const Page = async () => {
         </ul>
       </div>
       <div className="fixed bottom-0 w-full p-1">
-        <Button className="w-full" size="lg" asChild>
-          <Link href="/app/recipes/new">New Recipe</Link>
-        </Button>
+        <NewRecipeDrawer />
       </div>
     </>
   );
