@@ -35,14 +35,7 @@ const RecipePreviewCard = ({ recipe }: Props) => {
       <Card className="relative overflow-hidden">
         <Link href={`/app/recipes/${recipe.id}/${recipe.slug}`}>
           {recipe.image && !minimized && (
-            <div className={cn("relative h-72")}>
-              <ImageWithPlaceholder
-                src={recipe.image}
-                alt="dish picture"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <ImageWithPlaceholder src={recipe.image} alt="dish picture" />
           )}
           <CardHeader>
             <CardTitle>{recipe.name}</CardTitle>

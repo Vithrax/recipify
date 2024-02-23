@@ -1,5 +1,4 @@
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 import StepItem from "./recipe-instruction-step";
 import IngredientItem from "./recipe-ingredient";
 import RecipeDropdownOptions from "./recipe-dropdown-options";
@@ -7,8 +6,6 @@ import { type RouterOutputs } from "@/trpc/shared";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import RecipeUploadDropzone from "./recipe-upload-dropzone";
-import { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import ImageWithPlaceholder from "@/components/ui/image-with-placeholder";
 
 type FullRecipe = NonNullable<RouterOutputs["recipe"]["getById"]>;
@@ -27,9 +24,7 @@ const RecipeView = ({ recipe }: Props) => {
           <ImageWithPlaceholder
             src={recipe.image}
             alt="dish preview"
-            width={2000}
-            height={2000}
-            className="max-h-72 object-cover"
+            zoomable
           />
         ) : (
           <RecipeUploadDropzone recipeId={recipe.id} />
