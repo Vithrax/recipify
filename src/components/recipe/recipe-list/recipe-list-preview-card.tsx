@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Card,
   CardDescription,
@@ -15,6 +14,7 @@ import { useRecipeListStore } from "@/state/recipe-list";
 import { api } from "@/trpc/react";
 import { type Recipe } from "@/server/db/schema";
 import Link from "next/link";
+import ImageWithPlaceholder from "@/components/ui/image-with-placeholder";
 
 interface Props {
   recipe: Recipe;
@@ -36,7 +36,7 @@ const RecipePreviewCard = ({ recipe }: Props) => {
         <Link href={`/app/recipes/${recipe.id}/${recipe.slug}`}>
           {recipe.image && !minimized && (
             <div className={cn("relative h-72")}>
-              <Image
+              <ImageWithPlaceholder
                 src={recipe.image}
                 alt="dish picture"
                 fill

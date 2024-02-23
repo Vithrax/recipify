@@ -7,6 +7,9 @@ import { type RouterOutputs } from "@/trpc/shared";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import RecipeUploadDropzone from "./recipe-upload-dropzone";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import ImageWithPlaceholder from "@/components/ui/image-with-placeholder";
 
 type FullRecipe = NonNullable<RouterOutputs["recipe"]["getById"]>;
 
@@ -16,45 +19,12 @@ interface Props {
 
 const RecipeView = ({ recipe }: Props) => {
   const { name, description, steps, ingredients } = recipe;
-  const dummyIngredients = [
-    { amount: "400g", name: "minced beef" },
-    { amount: "2", name: "buns" },
-    { amount: "4-6", name: "slices of lettuce or other similar vegge" },
-    { amount: "1/2", name: "onion" },
-    { amount: "2 slices", name: "bacon" },
-    { amount: "2 slices", name: "tomato" },
-    { amount: "2 slices", name: "pickle" },
-    { amount: "1 tbsp", name: "mustard" },
-    { amount: "1 tbsp", name: "ketchup" },
-  ];
-
-  const dummySteps = [
-    {
-      title: "Prepare Meat",
-      description:
-        "Unpack meat, place it in a bowl, mix well, shape into 2cm thick burgers, add salt and pepper",
-    },
-    {
-      title: "Prepare veggies",
-      description: "cut onion into rings, slice tomato and pickles",
-    },
-    {
-      title: "Grill the meat and toast buns",
-      description:
-        "on a high heat above the flame, take the burgers and cook them on both sides, around 2mins on each side. Take buns and slice them into two parts, add a touch of butter and place them butter down on cooler side of a grill with slices of bacon",
-    },
-    {
-      title: "Assemble the burger",
-      description:
-        "take the bottom half of the bun, add ketchup, then place onions tomato and pickles. place the burger, and bacon, add mustard and add the top half of bun",
-    },
-  ];
 
   return (
     <>
       <header>
         {recipe.image ? (
-          <Image
+          <ImageWithPlaceholder
             src={recipe.image}
             alt="dish preview"
             width={2000}
